@@ -61053,6 +61053,10 @@ process.on('uncaughtException', e => {
 });
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
+        if (core.getBooleanInput('cache-skip-save')) {
+            core.info('Skipping cache save');
+            return;
+        }
         try {
             const cacheLock = core.getInput('cache');
             yield cachePackages(cacheLock);

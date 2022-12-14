@@ -13,6 +13,11 @@ process.on('uncaughtException', e => {
 });
 
 export async function run() {
+  if (core.getBooleanInput('cache-skip-save')) {
+    core.info('Skipping cache save')
+    return;
+  }
+
   try {
     const cacheLock = core.getInput('cache');
     await cachePackages(cacheLock);
